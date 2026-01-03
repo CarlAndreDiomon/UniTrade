@@ -1,6 +1,5 @@
 import { MessageCircleIcon, UserCircle2 } from "lucide-react";
 import uniform from "../assets/image.png";
-import Chat from "../Components/UI/Chat";
 
 export default function HomePage() {
   return (
