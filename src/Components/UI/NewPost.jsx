@@ -81,7 +81,7 @@ export default function NewPost() {
       {/* Modal */}
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-          <div className="bg-white rounded-xl shadow-xl w-full max-w-lg overflow-hidden animate-in fade-in zoom-in duration-200">
+          <div className="bg-white rounded-xl shadow-xl w-full max-w-lg overflow-hidden animate-in fade-in zoom-in duration-200 max-h-[90vh] flex flex-col">
             {/* Header */}
             <div className="flex items-center justify-between p-4 border-b">
               <h2 className="text-xl font-bold text-gray-900">Create Post</h2>
@@ -94,7 +94,7 @@ export default function NewPost() {
             </div>
 
             {/* Body */}
-            <form onSubmit={handleSubmit} className="p-4">
+            <form onSubmit={handleSubmit} className="p-4 overflow-y-auto">
               {/* User Info */}
               <div className="flex items-center gap-3 mb-4">
                 <div className="size-10 rounded-full bg-blue-100 flex items-center justify-center">
