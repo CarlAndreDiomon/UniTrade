@@ -9,6 +9,8 @@ import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import { Loader } from "lucide-react";
 import ProfilePage from "./Pages/ProfilePage";
+import NotFoundPage from "./Pages/_404Page";
+import MobileOnlyWarning from "./Components/UI/MobileOnlyWarning";
 
 export default function App() {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
@@ -26,35 +28,44 @@ export default function App() {
       </div>
     );
   return (
-    <main>
-      <nav className={` ${authUser ? "block" : "hidden"} `}>
-        <Navbar />
-      </nav>
-      <section>
-        <Routes>
-          <Route
-            path="/"
-            element={!authUser ? <LandingPage /> : <Navigate to="/home" />}
-          />
-          <Route
-            path="/home"
-            element={authUser ? <HomePage /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/login"
-            element={!authUser ? <LoginPage /> : <Navigate to="/home" />}
-          />
-          <Route
-            path="/register"
-            element={!authUser ? <RegisterPage /> : <Navigate to="/home" />}
-          />
-          <Route
-            path="/profile"
-            element={authUser ? <ProfilePage /> : <Navigate to="/login" />}
-          />
-        </Routes>
-      </section>
-      <Toaster />
-    </main>
+    <>
+      {/* Desktop Warning - Visible on md screens and up */}
+      <div className="hidden md:block">
+        <MobileOnlyWarning />
+      </div>
+
+      {/* Mobile App - Hidden on md screens and up */}
+      <main className="md:hidden">
+        <nav className={` ${authUser ? "block" : "hidden"} `}>
+          <Navbar />
+        </nav>
+        <section>
+          <Routes>
+            <Route
+              path="/"
+              element={!authUser ? <LandingPage /> : <Navigate to="/home" />}
+            />
+            <Route
+              path="/home"
+              element={authUser ? <HomePage /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/login"
+              element={!authUser ? <LoginPage /> : <Navigate to="/home" />}
+            />
+            <Route
+              path="/register"
+              element={!authUser ? <RegisterPage /> : <Navigate to="/home" />}
+            />
+            <Route
+              path="/profile"
+              element={authUser ? <ProfilePage /> : <Navigate to="/login" />}
+            />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </section>
+        <Toaster />
+      </main>
+    </>
   );
 }
