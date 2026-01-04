@@ -8,7 +8,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
 
   const goToLandingPage = () => {
-    navigate("/landing");
+    navigate("/");
   };
 
   return (
