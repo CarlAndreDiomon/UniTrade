@@ -21,11 +21,6 @@ export default function Navbar() {
         </h1>
         <ul className=" flex gap-5">
           <li>
-            <a href="/Chats">
-              <MessageCircleIcon className=" text-white w-8 h-8" />
-            </a>
-          </li>
-          <li>
             <a href="/profile">
               <UserCircle2 className=" text-white w-8 h-8" />
             </a>

@@ -3,7 +3,6 @@ import HomePage from "./Pages/HomePage";
 import LoginPage from "./Pages/LoginPage";
 import RegisterPage from "./Pages/RegisterPage";
 import LandingPage from "./Pages/LandingPage";
-import ChatPage from "./Pages/ChatPage";
 import Navbar from "./Components/UI/Navbar";
 import { useAuthStore } from "./store/useAuthStore";
 import { useEffect } from "react";
@@ -48,10 +47,6 @@ export default function App() {
           <Route
             path="/register"
             element={!authUser ? <RegisterPage /> : <Navigate to="/home" />}
-          />
-          <Route
-            path="/chats"
-            element={authUser ? <ChatPage /> : <Navigate to="/login" />}
           />
           <Route
             path="/profile"
