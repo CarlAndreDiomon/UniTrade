@@ -8,7 +8,7 @@ export default function RegisterPage() {
   const navigate = useNavigate();
 
   const goToLandingPage = () => {
-    navigate("/landing");
+    navigate("/");
   };
   return (
     <main className=" w-screen h-screen bg-blue-200 ">
