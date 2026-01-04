@@ -9,6 +9,7 @@ import { useAuthStore } from "./store/useAuthStore";
 import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import { Loader } from "lucide-react";
+import ProfilePage from "./Pages/ProfilePage";
 
 export default function App() {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
@@ -51,6 +52,10 @@ export default function App() {
           <Route
             path="/chats"
             element={authUser ? <ChatPage /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/profile"
+            element={authUser ? <ProfilePage /> : <Navigate to="/login" />}
           />
         </Routes>
       </section>

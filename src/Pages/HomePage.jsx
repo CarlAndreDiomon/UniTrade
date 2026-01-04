@@ -1,50 +1,68 @@
-import { MessageCircleIcon, UserCircle2 } from "lucide-react";
-import uniform from "../assets/image.png";
+import { MessageCircleIcon, UserCircle2, Loader } from "lucide-react";
+import NewPost from "../Components/UI/NewPost";
+import { usePostStore } from "../store/usePostStore";
+import { useEffect } from "react";
 
 export default function HomePage() {
+  const { getPosts, posts, isPostsLoading } = usePostStore();
+
+  useEffect(() => {
+    getPosts();
+  }, [getPosts]);
+
+  if (isPostsLoading && posts.length === 0) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <Loader className="size-10 animate-spin" />
+      </div>
+    );
+  }
+
   return (
-    <main className="w-screen h-full bg-gray-100">
-      <section className="p-4 grid gap-5 pt-20">
-        <article className=" rounded-xl h-full bg-gray-200 p-2 gap-3 flex flex-col">
-          <div className="flex gap-2">
-            <UserCircle2 className="w-10 h-10" />
-            <div className="">
-              <h1 className="font-medium">Carl Andre R. Diomon</h1>
-              <p className="text-xs font-light">10:00pm </p>
+    <main className="w-screen h-full bg-gray-100 min-h-screen">
+      <section className="p-4 grid gap-5 pt-20 max-w-2xl mx-auto">
+        <NewPost />
+
+        {posts.map((post) => (
+          <article
+            key={post._id}
+            className="rounded-xl bg-white p-4 gap-3 flex flex-col shadow-sm"
+          >
+            <div className="flex gap-3 items-center">
+              <div className="size-10 rounded-full bg-gray-200 flex items-center justify-center">
+                <UserCircle2 className="w-6 h-6 text-gray-500" />
+              </div>
+              <div>
+                <h1 className="font-medium">
+                  {post.user?.name || "Unknown User"}
+                </h1>
+                <p className="text-xs font-light text-gray-500">
+                  {new Date(post.createdAt).toLocaleString()}
+                </p>
+              </div>
             </div>
+
+            <p className="text-gray-800">{post.caption}</p>
+
+            {(post.imageUrl || post.image) && (
+              <img
+                src={post.imageUrl || post.image}
+                alt="Post content"
+                className="w-full rounded-lg object-cover max-h-125"
+              />
+            )}
+
+            <button className="border rounded-lg text-lg py-1.5 px-4 hover:bg-black hover:text-white transition-all duration-150 w-full mt-2">
+              Inquire
+            </button>
+          </article>
+        ))}
+
+        {posts.length === 0 && !isPostsLoading && (
+          <div className="text-center text-gray-500 py-10">
+            No posts yet. Be the first to post!
           </div>
-          <p>For sale 150</p>
-          <img
-            src={uniform}
-            alt="img"
-            width={500}
-            height={300}
-            className="border rounded-2xl"
-          />
-          <button className="border rounded-lg text-xl p-1 hover:bg-black hover:text-white transition-all duration-150">
-            Inquire
-          </button>
-        </article>
-        <article className=" rounded-xl h-full bg-gray-200 p-2 gap-3 flex flex-col">
-          <div className="flex gap-2">
-            <UserCircle2 className="w-10 h-10" />
-            <div className="">
-              <h1 className="font-medium">Carl Andre R. Diomon</h1>
-              <p className="text-xs font-light">10:00pm </p>
-            </div>
-          </div>
-          <p>For sale 150</p>
-          <img
-            src={uniform}
-            alt="img"
-            width={500}
-            height={300}
-            className="border rounded-2xl"
-          />
-          <button className="border rounded-lg text-xl p-1  hover:bg-black hover:text-white transition-all duration-150">
-            Inquire
-          </button>
-        </article>
+        )}
       </section>
     </main>
   );

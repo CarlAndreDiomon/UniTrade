@@ -12,7 +12,7 @@ export default function Navbar() {
   const { logout } = useAuthStore();
   return (
     <main>
-      <nav className="px-5 w-full h-16 items-center flex justify-between bg-sky-300 fixed ">
+      <nav className="px-5 w-full h-16 items-center flex justify-between bg-sky-300 fixed top-0 z-40">
         <h1
           className=" text-xl font-semibold text-white "
           onClick={goToHomePage}
