@@ -1,5 +1,5 @@
 import { LogOutIcon, MessageCircleIcon, UserCircle2 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuthStore } from "../../store/useAuthStore";
 
 export default function Navbar() {
@@ -21,9 +21,9 @@ export default function Navbar() {
         </h1>
         <ul className=" flex gap-5">
           <li>
-            <a href="/profile">
+            <Link to="/profile">
               <UserCircle2 className=" text-white w-8 h-8" />
-            </a>
+            </Link>
           </li>
           <li>
             <button onClick={logout}>
