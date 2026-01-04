@@ -41,7 +41,7 @@ export default function NewPost() {
 
     const formData = new FormData();
     formData.append("caption", caption);
-    formData.append("facebookName", facebookLink);
+    formData.append("facebookName", facebookLink.replace(/\s/g, ""));
     if (selectedImage) {
       formData.append("image", selectedImage);
     }
@@ -115,12 +115,10 @@ export default function NewPost() {
               <div className="mb-4">
                 <input
                   type="text"
-                  placeholder="Facebook Username (no spaces)"
+                  placeholder="Facebook Username"
                   className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                   value={facebookLink}
-                  onChange={(e) =>
-                    setFacebookLink(e.target.value.replace(/\s/g, ""))
-                  }
+                  onChange={(e) => setFacebookLink(e.target.value)}
                 />
               </div>
 

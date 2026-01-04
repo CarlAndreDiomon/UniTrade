@@ -1,4 +1,4 @@
-import { MessageCircleIcon, UserCircle2, Loader } from "lucide-react";
+import { MessageCircleIcon, UserCircle2, Loader, Facebook } from "lucide-react";
 import NewPost from "../Components/UI/NewPost";
 import { usePostStore } from "../store/usePostStore";
 import { useEffect } from "react";
@@ -43,6 +43,15 @@ export default function HomePage() {
             </div>
 
             <p className="text-gray-800">{post.caption}</p>
+
+            {(post.facebookName || post.facebook) && (
+              <div className="flex items-center gap-2 text-blue-600 bg-blue-50 p-2 rounded-lg w-fit">
+                <Facebook className="w-4 h-4" />
+                <span className="text-sm font-medium">
+                  {post.facebookName || post.facebook}
+                </span>
+              </div>
+            )}
 
             {(post.imageUrl || post.image) && (
               <img
