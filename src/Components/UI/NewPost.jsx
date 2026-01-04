@@ -9,6 +9,7 @@ export default function NewPost() {
   const { createPost, isCreatingPost } = usePostStore();
   const [isOpen, setIsOpen] = useState(false);
   const [caption, setCaption] = useState("");
+  const [facebookLink, setFacebookLink] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const fileInputRef = useRef(null);
@@ -40,6 +41,7 @@ export default function NewPost() {
 
     const formData = new FormData();
     formData.append("caption", caption);
+    formData.append("facebookName", facebookLink);
     if (selectedImage) {
       formData.append("image", selectedImage);
     }
@@ -49,6 +51,7 @@ export default function NewPost() {
     if (success) {
       setIsOpen(false);
       setCaption("");
+      setFacebookLink("");
       handleRemoveImage();
     }
   };
@@ -109,12 +112,24 @@ export default function NewPost() {
                 </div>
               </div>
 
+              <div className="mb-4">
+                <input
+                  type="text"
+                  placeholder="Facebook Username (no spaces)"
+                  className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+                  value={facebookLink}
+                  onChange={(e) =>
+                    setFacebookLink(e.target.value.replace(/\s/g, ""))
+                  }
+                />
+              </div>
+
               {/* Caption Input */}
               <textarea
                 value={caption}
                 onChange={(e) => setCaption(e.target.value)}
                 placeholder={`What's on your mind, ${authUser.name}?`}
-                className="w-full min-h-30 p-1 resize-none border-none focus:ring-0 text-lg placeholder:text-gray-400 p-0 mb-4"
+                className="w-full min-h-30 resize-none border-none focus:ring-0 text-lg placeholder:text-gray-400 p-1 mb-4"
               />
 
               {/* Image Preview */}

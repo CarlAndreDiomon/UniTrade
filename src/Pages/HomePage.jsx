@@ -52,7 +52,36 @@ export default function HomePage() {
               />
             )}
 
-            <button className="border rounded-lg text-lg py-1.5 px-4 hover:bg-black hover:text-white transition-all duration-150 w-full mt-2">
+            <button
+              onClick={() => {
+                const fbContact = post.facebookName || post.facebook;
+                if (fbContact) {
+                  // Helper to extract username if a URL is provided
+                  let username = fbContact;
+                  if (
+                    fbContact.includes("facebook.com") ||
+                    fbContact.includes("messenger.com")
+                  ) {
+                    // Remove trailing slash if present
+                    const cleanUrl = fbContact.replace(/\/$/, "");
+                    // Get the last part of the URL
+                    const parts = cleanUrl.split("/");
+                    username = parts[parts.length - 1];
+                    // Handle query parameters (e.g., profile.php?id=...)
+                    if (username.includes("?")) {
+                      username = username.split("?")[0];
+                    }
+                  }
+
+                  // Construct the Messenger link
+                  const url = `https://m.me/${username}`;
+                  window.open(url, "_blank");
+                } else {
+                  alert("No Facebook contact provided for this post.");
+                }
+              }}
+              className="border rounded-lg text-lg py-1.5 px-4 hover:bg-black hover:text-white transition-all duration-150 w-full mt-2"
+            >
               Inquire
             </button>
           </article>
