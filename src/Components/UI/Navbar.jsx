@@ -1,4 +1,9 @@
-import { LogOutIcon, MessageCircleIcon, UserCircle2 } from "lucide-react";
+import {
+  LogOutIcon,
+  MessageCircleIcon,
+  UserCircle2,
+  HelpCircle,
+} from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuthStore } from "../../store/useAuthStore";
 
@@ -20,6 +25,11 @@ export default function Navbar() {
           UniTrade
         </h1>
         <ul className=" flex gap-5">
+          <li>
+            <Link to="/about">
+              <HelpCircle className=" text-white w-8 h-8" />
+            </Link>
+          </li>
           <li>
             <Link to="/profile">
               <UserCircle2 className=" text-white w-8 h-8" />

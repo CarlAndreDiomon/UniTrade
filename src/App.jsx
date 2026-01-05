@@ -11,6 +11,7 @@ import { Loader } from "lucide-react";
 import ProfilePage from "./Pages/ProfilePage";
 import NotFoundPage from "./Pages/_404Page";
 import MobileOnlyWarning from "./Components/UI/MobileOnlyWarning";
+import AboutPage from "./Pages/AboutPage";
 
 export default function App() {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
@@ -60,6 +61,10 @@ export default function App() {
             <Route
               path="/profile"
               element={authUser ? <ProfilePage /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/about"
+              element={authUser ? <AboutPage /> : <Navigate to="/login" />}
             />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
